@@ -6,8 +6,8 @@
   </head>
   <body>
     <header>
-      <img src="./src/image/common/hatelabo.png" alt="Hatelabo::">
-      <img src="./src/image/common/anonymous_diary.png" alt="AnonymousDiary">
+      <img src="../src/image/common/hatelabo.png" alt="Hatelabo::">
+      <img src="../src/image/common/anonymous_diary.png" alt="AnonymousDiary">
     </header>
     <div id="user">
       <div id="user-name">
