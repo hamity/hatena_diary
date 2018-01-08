@@ -13,11 +13,11 @@
       <div id="user-name">
         ようこそhogeさん
       </div>
-      <ul id="user-setting">
-        <li>hogeの日記</li>
-        <li>日記を書く</li>
-        <li>ログアウト</li>
-      </ui>
+      <div id="user-detail">
+        <a href="#">hogeの日記</a>
+        <a href="#">日記を書く</a>
+        <a href="#">ログアウト</a>
+      </div>
     </div>
     <!-- パンくずリスト(タイトルではちょっと違うが) -->
     <div id="breadcrumbs">
