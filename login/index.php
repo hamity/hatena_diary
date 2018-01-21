@@ -6,8 +6,8 @@
   </head>
   <body>
     <header>
-      <img src="../src/image/common/hatelabo.png" alt="Hatelabo::">
-      <img src="../src/image/common/anonymous_diary.png" alt="AnonymousDiary">
+      <img src="/src/image/common/hatelabo.png" alt="Hatelabo::">
+      <img src="/src/image/common/anonymous_diary.png" alt="AnonymousDiary">
     </header>
     <div id="user">
       <div id="user-name">
@@ -17,6 +17,8 @@
         <a href="#" id="signup">ユーザー登録</a>
         <a href="#" id="signin">ログイン</a>
       </ui>
+    </div>
+    <main>
       <div id="user-data-input">
         <form class="input-form" action="./user-check" method="post"><br>
           <input type="text" name="userdata" value="username" required><br>
@@ -42,6 +44,6 @@
       <div class="copyright">
         Copyright (C) 2018 hatena. All Rights Reserved.
       </div>
-    </div>
+    </main>
   </body>
 </html>

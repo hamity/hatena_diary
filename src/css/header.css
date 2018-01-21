@@ -1,0 +1,12 @@
+.header-image{
+  max-width: 300px;
+  height: auto;
+}
+
+#user-detail>a{
+  margin-right: 20px;
+}
+
+#breadcrumbs>ul{
+  list-style: none;
+}

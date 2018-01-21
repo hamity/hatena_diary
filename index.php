@@ -3,11 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title>はてな匿名ダイアリー</title>
+    <link rel="stylesheet" href="./src/css/header.css">
   </head>
   <body>
     <header>
-      <img src="../src/image/common/hatelabo.png" alt="Hatelabo::">
-      <img src="../src/image/common/anonymous_diary.png" alt="AnonymousDiary">
+      <img src="./src/image/common/hatelabo.png" alt="Hatelabo::" class="header-image">
+      <img src="./src/image/common/anonymous_diary.png" alt="AnonymousDiary" class="header-image">
     </header>
     <div id="user">
       <div id="user-name">
@@ -21,10 +22,9 @@
     </div>
     <!-- パンくずリスト(タイトルではちょっと違うが) -->
     <div id="breadcrumbs">
-      <ul>
-        <li><前の25件</li>
-        <li>次の25件></li>
-      </ul>
+      <!-- page番号をgetで受け取る -->
+      <a href="#"><前の25件</a>
+      <a href="#">次の25件></a>
     </div>
     <main>
       <div class="date-contents">
