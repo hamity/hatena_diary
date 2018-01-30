@@ -1,4 +1,5 @@
-# ApacheによるRewrite機能
+# 開発メモ
+## ApacheによるRewrite機能を使用する
 
 ## まず表示する
 Apacheの設定ファイルであるhttpd.confを編集する
@@ -232,9 +233,62 @@ Directory + / = $1
 
 http://192.168.33.10/hatena\_diary/index.htmlで表示されるようになった！やったー！！
 
+## で、やりたかったこととは？
 
+例えば、userIDがhogeという人のURLがhttp://xxxx/hogeといったようにしたいのである。
 
+しかし、このままではhogeの部分はデータとして受け取れないので、rewrite機能を使って、内部では
 
+http://xxxx/index.php?id=hogeといったようにしたい。
+
+詳しくは以下のURLを参照
+
+<http://www.objective-php.net/mvc/dispatcher>
+
+## リクエストの振り分けを行う
+
+今回は汎用的な振り分け処理クラスを作成しようと思う。
+その前に、いくつかPHPの性質でよくわからないのを調べておく。
+
+- PHPはクラス名を変数に置き換えられる
+参考URL : http://php.net/manual/ja/language.oop5.basic.php#language.oop5.basic.new
+
+```js
+class hoge{}
+$hoge = new hoge();
+$url_name = 'hoge';
+$hoge = new url_name(); //２行目と４行目は同じ処理をしている
+```
+
+注意点: 似たような処理や役割のクラスが存在する場合、クラス名には法則性を決め、すべてそれに沿わせるべきである。でなければ、クラス名を変数に置き換える恩恵を受けられなくなってしまう。
+
+- [上のサイト](http://www.objective-php.net/mvc/dispatcher)のsaySystemRoot()とdispatch()が何をしたいのかよくわからない
+  - saySystemRoot()は末尾の'/'マークを取り除いた文字列を返すメソッド
+  - dispatch()は①URLのパラメータを取得し、②そのパラメータでクラスを振り分け、③クラスファイルを読み込み、④そのクラスのインスタンスを生成まで（つまりクラスの振り分け全般）行う
+- メソッド名はなぜ小文字から始まっているの？
+  - phpではクラス名はパスカルケース(最初の単語も大文字で書くやつ）、メソッド名と変数名はスネークケース（単語の区切りを_で表す）がよく使われているため
+    - そういう意味では、参考にしているURLのsaySystemRoot()はあんまりよくなくて、say_system_root()の方がいいと思う
+-  $param = ereg_replace('/?$', '', $_SERVER['REQUEST_URI']);は何をしているのか
+  - ereg_replaceは非推奨。preg_replaceを使用すること
+  - ereg_replace($pattern, $replacement, $subject); はsubjectに対してpatternに該当する部分を$replacementに置換するメソッド
+  - 「?」は直前の要素が０個か１個の場合にマッチ(https?はsにマッチするため、http or httpsがマッチ対象となる)
+  - 「$」は文字列の末尾にマッチする
+
+さて、なんとなくわかったところで、早速書いていく。
+
+その前に、コントローラークラスに規則性をつけよう。
+
+今回は、コントローラークラスにはXxxxControllerといった名前をつけるとする。
+
+## コード概要
+
+$\_SERVER[‘REQUEST\_URI’] : ページにアクセスするために指定された URIを返す
+
+例) http://www.example/hoge/ の場合 /hoge/が代入される
+
+explode($delimiter, $string) : $stringを$sdelimiterで区切った部分文字列とし、配列として返す
+
+strlen($string) : $stringの文字列の長さを返す
 
 
 

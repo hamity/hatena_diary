@@ -94,6 +94,15 @@
           </div>
         </div>
       </div>
+      <?php
+      //require_once(dirname(__FILE__).'/controllers/IndexController.php');
+      require_once(dirname(__FILE__).'/Dispatcher.php');
+      echo 'hogehoge';    //呼ばれない
+      $dispatcher = new Dispatcher();
+      $dispatcher->dispatch();
+      // $index = new IndexController();
+      // $index->index_action();
+      ?>
     </main>
   </body>
 </html>
