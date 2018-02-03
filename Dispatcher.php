@@ -1,11 +1,11 @@
 <?php
 class Dispatcher{
   function __construct(){
-    echo 'Load IndexConroller';
+    // echo 'Load IndexConroller';
   }
 
   public function dispatch(){
-    echo 'call dispacth()'；
+    // echo 'call dispacth()';
     $uri = $_SERVER['REQUEST_URI'];
 
     // /hatena_diary/だと空白が代入される
@@ -20,14 +20,15 @@ class Dispatcher{
 
     $class_name = ucfirst(strtolower($param[0])).'Controller';
     require_once(dirname(__FILE__).'/controllers/'.$class_name.'.php');
-    echo dirname(__FILE__).'/controllers/'.$class_name.'.php';
+    echo $class_name.'<br>';
     $controller = new $class_name();
-
     $get_name = 'index';
     if(count($param) > 1){
+      if($param[1] )
       $get_name = $param[1];
     }
     $get_method_name = $get_name.'_action';
-    $class_name->$get_method_name();
+    echo $get_method_name.'<br>';
+    $controller->$get_method_name();
   }
 }

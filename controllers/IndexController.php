@@ -1,10 +1,10 @@
 <?php
 class IndexController{
   function __construct(){
-    echo 'Load IndexConroller';
+    echo 'Load IndexConroller<br>';
   }
 
-  function index_action(){
-    echo 'hogehoge';
+  public function index_action(){
+    echo 'index_controller()';
   }
 }
