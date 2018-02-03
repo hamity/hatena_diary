@@ -3,7 +3,21 @@ header>img{
   height:50px;
 }
 
-#user-detail>a{
+header{
+  border-bottom: solid 2px #6464fc;
+}
+
+#user{
+  width:auto;
+  background-color: #6464fc;
+  color: white;
+  padding-left: 20px;
+}
+
+#user_name{
+}
+
+#user_detail>a{
   margin-right: 20px;
 }
 

@@ -4,7 +4,14 @@ class IndexController{
     echo 'Load IndexConroller<br>';
   }
 
-  public function index_action(){
-    echo 'index_controller()';
+  public function index_action($argument){
+    echo $argument;
+    //指定された記事を表示する
+    if($argument !== ''){
+      //$argumentの記事を表示する
+    }
+    else{
+      //記事一覧を表示
+    }
   }
 }
