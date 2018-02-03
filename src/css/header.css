@@ -1,6 +1,6 @@
-.header-image{
+header>img{
   max-width: 300px;
-  height: auto;
+  height:50px;
 }
 
 #user-detail>a{
