@@ -32,7 +32,7 @@ class Dispatcher{
         $get_name = $param[1];
       }
     }
-    $get_method_name = $get_name.'_action';
+    $get_method_name = $get_name.'Action';
     echo $get_method_name.'<br>';
     $controller->$get_method_name($argument);
   }

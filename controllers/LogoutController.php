@@ -1,6 +1,6 @@
 <?php
 class LogputController{
-    public function index_action(){
+    public function indexAction(){
         
     }
 }
