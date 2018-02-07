@@ -1,16 +1,22 @@
 <?php
-class IndexController{
-  function __construct(){
+class IndexController
+{
+  function __construct()
+  {
     echo 'Load IndexConroller<br>';
   }
 
-  public function indexAction($argument){
+  public function indexAction($argument)
+  {
     echo $argument;
     //指定された記事を表示する
-    if($argument !== ''){
+    if($argument !== '')
+    {
+      echo $argument;
       //$argumentの記事を表示する
     }
-    else{
+    else
+    {
       //記事一覧を表示
     }
   }
