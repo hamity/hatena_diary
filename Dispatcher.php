@@ -4,12 +4,12 @@ class Dispatcher
   public function dispatch()
   {
     echo 'Dispacher Class Call!!<br>';
-    $uri = '/hatena_diary/hogehoge/foo';    //テスト用
+    $uri = '/hatena_diary/';    //テスト用
 
     $uri_array = $this->replaceUri($uri);
     $uri_array = $this->replaceUri($_SERVER['REQUEST_URI']);
 
-    // $param = explode('/', $uri_normalization);
+    $this->getControllerInstance($uri_array);
 
     // $controller_argument = '';
     // if(strlen($param[0]) === 0 || ctype_digit($param[0]) === true)
@@ -42,5 +42,44 @@ class Dispatcher
     $remove_hatena_diary = str_replace('/hatena_diary', '', $pass);
     $url_normalization = ltrim($remove_hatena_diary, '/');
     return explode('/', $url_normalization);
+  }
+
+  //引数の0番目の要素を参考にController系のクラスのインスタンスを返す
+  function getControllerInstance($uri_array)
+  {
+    //URIが存在しない場合は、indexControllerを呼ぶ
+    if($uri_array[0] == '')
+    {
+      return $this->loadAndGetControllerInstance('index');
+    }
+
+    switch ($uri_array[0]) 
+    {
+      case 'login':
+        return $this->loadAndGetControllerInstance('login');
+      
+      case 'logout':
+
+        break;
+      
+      case 'logout':
+
+        break;
+    }
+
+    // 数字のみで構成されている場合
+
+    // 英数字のみで構成されている場合
+
+    //それ以外は不正なURL
+    
+  }
+
+  // 引数の名前がControllerの前についたControllerファイルをロード&インデックスを生成し、インデックスを返すメソッド
+  function loadAndGetControllerInstance($controller_first_name)
+  {
+    $controller_name = ucfirst($controller_first_name) . 'Controller';
+    require_once('./controllers/' . $controller_name . '.php');
+    return new $controller_name;
   }
 }
