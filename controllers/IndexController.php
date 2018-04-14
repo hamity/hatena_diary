@@ -3,16 +3,14 @@ class IndexController
 {
   function __construct()
   {
-    echo 'Load IndexConroller<br>';
+    echo 'load IndexConroller<br>';
   }
 
   public function indexAction($argument)
   {
-    echo $argument;
     //指定された記事を表示する
     if($argument !== '')
     {
-      echo $argument;
       //$argumentの記事を表示する
     }
     else

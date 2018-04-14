@@ -4,35 +4,12 @@ class Dispatcher
   public function dispatch()
   {
     echo 'Dispacher Class Call!!<br>';
-    $uri = '/hatena_diary/';    //テスト用
+    $uri = '/hatena_diary/348/hogehoge';    //テスト用
 
     $uri_array = $this->replaceUri($uri);
-    $uri_array = $this->replaceUri($_SERVER['REQUEST_URI']);
+    // $uri_array = $this->replaceUri($_SERVER['REQUEST_URI']);
 
-    $this->getControllerInstance($uri_array);
-
-    // $controller_argument = '';
-    // if(strlen($param[0]) === 0 || ctype_digit($param[0]) === true)
-    // {
-    //   $controller_argument = $param[0];
-    //   $param[0] = 'index';
-    // }
-
-    // $class_name = ucfirst(strtolower($param[0])).'Controller';
-    // require_once(dirname(__FILE__).'/controllers/'.$class_name.'.php');
-    // echo $class_name.'<br>';
-    // $controller = new $class_name($controller_argument);
-
-    // //URIに呼び出すメソッド名が書かれていない場合はindexAction()を呼び出す
-    // $get_name = 'index';
-    // $action_argument = '';
-    // if(count($param) > 1)
-    // {
-    //   $get_name = $param[1];
-    // }
-    // $get_method_name = $get_name.'Action';
-    // echo $get_method_name.'<br>';
-    // $controller->$get_method_name($action_argument);
+    $classInsntace = $this->getControllerInstance($uri_array);
   }
 
   // /hatena_diary以下のURIの配列化. /hatena_diary/hoge/fooの場合、['hoge', 'foo']を返す
@@ -59,20 +36,23 @@ class Dispatcher
         return $this->loadAndGetControllerInstance('login');
       
       case 'logout':
-
-        break;
-      
-      case 'logout':
-
+        return $this->loadAndGetControllerInstance('logout');
         break;
     }
 
     // 数字のみで構成されている場合
-
+    if(ctype_digit($uri_array[0]))
+    {
+      return $this->loadAndGetControllerInstance('');
+    }
     // 英数字のみで構成されている場合
+    if(ctype_alnum($uri_array[0]))
+    {
+      return $this->loadAndGetControllerInstance('');
+    }
 
     //それ以外は不正なURL
-    
+    throw new Exception('不正なURLでアクセスされました');
   }
 
   // 引数の名前がControllerの前についたControllerファイルをロード&インデックスを生成し、インデックスを返すメソッド
@@ -80,6 +60,6 @@ class Dispatcher
   {
     $controller_name = ucfirst($controller_first_name) . 'Controller';
     require_once('./controllers/' . $controller_name . '.php');
-    return new $controller_name;
+    return new $controller_name();
   }
 }

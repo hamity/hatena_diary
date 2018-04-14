@@ -1,6 +1,8 @@
 <?php
-class LogputController{
-    public function indexAction(){
-        
+class LogoutController
+{
+    function __construct()
+    {
+        echo 'load Logout Controller<br>';
     }
 }
