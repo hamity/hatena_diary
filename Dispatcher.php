@@ -4,12 +4,13 @@ class Dispatcher
   public function dispatch()
   {
     echo 'Dispacher Class Call!!<br>';
-    $uri = '/hatena_diary/348/hogehoge';    //テスト用
+    $uri = '/hatena_diary/';    //テスト用
 
-    $uri_array = $this->replaceUri($uri);
+    $uri_array = $this->replaceUri($uri);   //テスト用
     // $uri_array = $this->replaceUri($_SERVER['REQUEST_URI']);
 
-    $classInsntace = $this->getControllerInstance($uri_array);
+    $class_instance = $this->getControllerInstance($uri_array);
+    $class_instance->indexAction($uri_array);
   }
 
   // /hatena_diary以下のURIの配列化. /hatena_diary/hoge/fooの場合、['hoge', 'foo']を返す
