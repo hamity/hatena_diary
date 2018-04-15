@@ -8,5 +8,6 @@ class IndexController
 
   public function indexAction($argument)
   {
+    var_dump($argument);
   }
 }

@@ -4,20 +4,23 @@ class Dispatcher
   public function dispatch()
   {
     echo 'Dispacher Class Call!!<br>';
-    $uri = '/hatena_diary/';    //テスト用
 
-    $uri_array = $this->replaceUri($uri);   //テスト用
-    // $uri_array = $this->replaceUri($_SERVER['REQUEST_URI']);
+    $uri_array = $this->replaceUri();   // '/'が最初にある形で代入される
 
     $class_instance = $this->getControllerInstance($uri_array);
-    $class_instance->indexAction($uri_array);
+    $class_instance->indexAction(array_shift($uri_array));
   }
 
   // /hatena_diary以下のURIの配列化. /hatena_diary/hoge/fooの場合、['hoge', 'foo']を返す
-  function replaceUri($url)
+  function replaceUri()
   {
-    $pass = parse_url($url, PHP_URL_PATH);    // TODO これはいるのか？
-    $remove_hatena_diary = str_replace('/hatena_diary', '', $pass);
+    $url = $_SERVER['REQUEST_URI'];   // テスト中はコメントアウトする
+    $url = '/hatena_diary/login/hogehoge';    //テスト用
+
+    $pass = parse_url($url, PHP_URL_PATH);
+    $index_part = strrchr($pass, '/index');
+    $remove_index = str_replace($index_part, '', $pass);
+    $remove_hatena_diary = str_replace('/hatena_diary', '', $remove_index);
     $url_normalization = ltrim($remove_hatena_diary, '/');
     return explode('/', $url_normalization);
   }
